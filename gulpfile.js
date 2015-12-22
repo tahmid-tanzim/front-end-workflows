@@ -29,6 +29,14 @@ var sassSources = [
     'components/sass/style.scss'
 ];
 
+var htmlSources = [
+    'builds/development/*.html'
+];
+
+var jsonSources = [
+    'builds/development/js/*.json'
+];
+
 /**
  * Gulp Task for Compile the CoffeeScript to JavaScript
  * $ gulp coffee
@@ -75,13 +83,9 @@ gulp.task('watch', function () {
     gulp.watch(coffeeSources, ['coffee']);
     gulp.watch(jsSources, ['js']);
     gulp.watch('components/sass/*', ['compass']);
+    gulp.watch(htmlSources, ['html']);
+    gulp.watch(jsonSources, ['json']);
 });
-
-/**
- * Execute all Gulp Task
- * $ gulp default
- * */
-gulp.task('default', ['coffee', 'js', 'compass', 'connect', 'watch']);
 
 /**
  * Web Browser live reload
@@ -94,3 +98,25 @@ gulp.task('connect', function() {
         livereload: true
     });
 });
+
+/**
+ * Execute html Gulp Task
+ * $ gulp html
+ * */
+gulp.task('html', function () {
+    gulp.src(htmlSources).pipe(connect.reload());
+});
+
+/**
+ * Execute json Gulp Task
+ * $ gulp json
+ * */
+gulp.task('json', function () {
+    gulp.src(jsonSources).pipe(connect.reload());
+});
+
+/**
+ * Execute all Gulp Task
+ * $ gulp default
+ * */
+gulp.task('default', ['html', 'json', 'coffee', 'js', 'compass', 'connect', 'watch']);
