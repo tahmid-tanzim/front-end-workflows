@@ -1,0 +1,15 @@
+{
+  "name": "workflows",
+  "version": "0.0.1",
+  "description": "A web project to demonstrate front-end application workflows",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tahmid-tanzim/workflows.git"
+  },
+  "author": "Tahmid Tanzim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tahmid-tanzim/workflows/issues"
+  },
+  "homepage": "https://github.com/tahmid-tanzim/workflows#readme"
+}
