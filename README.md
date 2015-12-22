@@ -55,6 +55,7 @@ ruby -v
 ### 1.3. Installing [Gulp.js](http://gulpjs.com/) for creating workflows
 ```
 npm install -g gulp
+npm install --save-dev gulp gulp-util
 ```
 ### 1.4. Installing [Browserify](http://browserify.org/) for requiring modules in browser
 ```

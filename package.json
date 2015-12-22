@@ -11,5 +11,9 @@
   "bugs": {
     "url": "https://github.com/tahmid-tanzim/workflows/issues"
   },
-  "homepage": "https://github.com/tahmid-tanzim/workflows#readme"
+  "homepage": "https://github.com/tahmid-tanzim/workflows#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-util": "^3.0.7"
+  }
 }
