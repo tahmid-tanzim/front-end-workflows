@@ -3,6 +3,7 @@ var gulp = require('gulp'),
     coffee = require('gulp-coffee'),
     concat = require('gulp-concat'),
     compass = require('gulp-compass'),
+    connect = require('gulp-connect'),
     browserify = require('gulp-browserify');
 
 /**
@@ -42,11 +43,12 @@ gulp.task('coffee', function () {
  * Gulp Task for Concat all the JavaScript file into one uncompressed file `builds/development/js/script.js`
  * $ gulp js
  * */
-gulp.task('js', ['coffee'], function () {
+gulp.task('js', function () {
     gulp.src(jsSources)
         .pipe(concat('script.js'))
         .pipe(browserify())
-        .pipe(gulp.dest('builds/development/js'));
+        .pipe(gulp.dest('builds/development/js'))
+        .pipe(connect.reload());
 });
 
 /**
@@ -61,7 +63,8 @@ gulp.task('compass', function () {
             image: 'builds/development/images',
             style: 'expanded'
         })).on('error', gutil.log)
-        .pipe(gulp.dest('builds/development/css'));
+        .pipe(gulp.dest('builds/development/css'))
+        .pipe(connect.reload());
 });
 
 /**
@@ -78,4 +81,16 @@ gulp.task('watch', function () {
  * Execute all Gulp Task
  * $ gulp default
  * */
-gulp.task('default', ['coffee', 'js', 'compass']);
+gulp.task('default', ['coffee', 'js', 'compass', 'connect', 'watch']);
+
+/**
+ * Web Browser live reload
+ * $ gulp connect
+ * URL: https://www.npmjs.com/package/gulp-connect
+ * */
+gulp.task('connect', function() {
+    connect.server({
+        root: 'builds/development/',
+        livereload: true
+    });
+});
