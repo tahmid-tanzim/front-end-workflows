@@ -42,7 +42,7 @@ gulp.task('coffee', function () {
  * Gulp Task for Concat all the JavaScript file into one uncompressed file `builds/development/js/script.js`
  * $ gulp js
  * */
-gulp.task('js', function () {
+gulp.task('js', ['coffee'], function () {
     gulp.src(jsSources)
         .pipe(concat('script.js'))
         .pipe(browserify())
@@ -63,3 +63,9 @@ gulp.task('compass', function () {
         })).on('error', gutil.log)
         .pipe(gulp.dest('builds/development/css'))
 });
+
+/**
+ * Execute all Gulp Task
+ * $ gulp default
+ * */
+gulp.task('default', ['coffee', 'js', 'compass']);
