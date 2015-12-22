@@ -2,7 +2,10 @@
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
 
+.tmp
+.sass-cache
+.DS_Store
+builds/**/images/*
+
 # IDE Configuration
 .idea
-
-.DS_Store
