@@ -58,6 +58,7 @@ npm install -g gulp
 npm install --save-dev gulp
 npm install --save-dev gulp-util
 npm install --save-dev gulp-coffee
+npm install --save-dev gulp-concat
 ```
 ### 1.4. Installing [Browserify](http://browserify.org/) for requiring modules in browser
 ```
