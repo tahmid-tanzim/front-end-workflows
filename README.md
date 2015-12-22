@@ -80,3 +80,5 @@ gem install compass
 ```
 ## 2. Software Version
 Link to [Semantic Versioning](http://semver.org/)
+## 3. Gulp API
+Link to [Gulp API](https://github.com/gulpjs/gulp/blob/master/docs/API.md)

@@ -35,7 +35,7 @@ var sassSources = [
 gulp.task('coffee', function () {
     gulp.src(coffeeSources)
         .pipe(coffee({bare: true}).on('error', gutil.log))
-        .pipe(gulp.dest('components/scripts'))
+        .pipe(gulp.dest('components/scripts'));
 });
 
 /**
@@ -46,7 +46,7 @@ gulp.task('js', ['coffee'], function () {
     gulp.src(jsSources)
         .pipe(concat('script.js'))
         .pipe(browserify())
-        .pipe(gulp.dest('builds/development/js'))
+        .pipe(gulp.dest('builds/development/js'));
 });
 
 /**
@@ -61,7 +61,17 @@ gulp.task('compass', function () {
             image: 'builds/development/images',
             style: 'expanded'
         })).on('error', gutil.log)
-        .pipe(gulp.dest('builds/development/css'))
+        .pipe(gulp.dest('builds/development/css'));
+});
+
+/**
+ * Gulp Task for monitor file changes
+ * $ gulp watch
+ * */
+gulp.task('watch', function () {
+    gulp.watch(coffeeSources, ['coffee']);
+    gulp.watch(jsSources, ['js']);
+    gulp.watch('components/sass/*', ['compass']);
 });
 
 /**
