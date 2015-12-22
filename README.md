@@ -63,8 +63,14 @@ npm install --save-dev gulp-concat
 ### 1.4. Installing [Browserify](http://browserify.org/) for requiring modules in browser
 ```
 npm install -g browserify
+npm install --save-dev gulp-browserify
 ```
-### 1.5. Installing [Sass](http://sass-lang.com/) and [Compass](http://compass-style.org/)
+### 1.5. Installing jQuery and mustache
+```
+npm install --save-dev jquery
+npm install --save-dev mustache
+```
+### 1.6. Installing [Sass](http://sass-lang.com/) and [Compass](http://compass-style.org/)
 ```
 ruby -v
 gem update
