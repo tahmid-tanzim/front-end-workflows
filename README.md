@@ -52,7 +52,7 @@ rbenv install 2.2.3
 rbenv global 2.2.3
 ruby -v
 ```
-### 1.3. Installing [Gulp.js](http://gulpjs.com/) for creating workflows
+### 1.3. Installing [Gulp.js](http://gulpjs.com/) and related packages for creating workflows
 ```
 npm install -g gulp
 npm install --save-dev gulp
@@ -66,6 +66,7 @@ npm install --save-dev gulp-clean
 npm install --save-dev gulp-connect
 npm install --save-dev gulp-if
 npm install --save-dev gulp-uglify
+npm install --save-dev gulp-minify-html
 ```
 ### 1.4. Installing [Browserify](http://browserify.org/) for requiring modules in browser
 ```
