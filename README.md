@@ -59,8 +59,13 @@ npm install --save-dev gulp
 npm install --save-dev gulp-util
 npm install --save-dev gulp-coffee
 npm install --save-dev gulp-concat
+gem update --system
+gem install compass
 npm install --save-dev gulp-compass
+npm install --save-dev gulp-clean
 npm install --save-dev gulp-connect
+npm install --save-dev gulp-if
+npm install --save-dev gulp-uglify
 ```
 ### 1.4. Installing [Browserify](http://browserify.org/) for requiring modules in browser
 ```
@@ -83,3 +88,5 @@ gem install compass
 Link to [Semantic Versioning](http://semver.org/)
 ## 3. Gulp API
 Link to [Gulp API](https://github.com/gulpjs/gulp/blob/master/docs/API.md)
+## 4. UglifyJS
+Link to [UglifyJS](https://github.com/mishoo/UglifyJS) 

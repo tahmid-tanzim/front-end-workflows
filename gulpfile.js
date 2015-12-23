@@ -3,7 +3,10 @@ var gulp = require('gulp'),
     coffee = require('gulp-coffee'),
     concat = require('gulp-concat'),
     compass = require('gulp-compass'),
+    gulpif = require('gulp-if'),
+    uglify = require('gulp-uglify'),
     connect = require('gulp-connect'),
+    clean = require('gulp-clean'),
     browserify = require('gulp-browserify');
 
 /**
@@ -14,27 +17,42 @@ gulp.task('log', function () {
     gutil.log('Console Print: Hello World!');
 });
 
-var coffeeSources = [
+var env,
+    coffeeSources,
+    jsSources,
+    sassSources,
+    htmlSources,
+    jsonSources,
+    outputDir;
+
+/**
+ * Ref: https://nodejs.org/docs/latest/api/process.html#process_process_env
+ * for Production ~> $ NODE_ENV=production gulp
+ * */
+env = process.env.NODE_ENV || 'development';
+outputDir = (env === 'development' ? 'builds/development/' : 'builds/production/');
+
+coffeeSources = [
     'components/coffee/tagline.coffee'
 ];
 
-var jsSources = [
+jsSources = [
     'components/scripts/rclick.js',
     'components/scripts/pixgrid.js',
     'components/scripts/tagline.js',
     'components/scripts/template.js'
 ];
 
-var sassSources = [
+sassSources = [
     'components/sass/style.scss'
 ];
 
-var htmlSources = [
-    'builds/development/*.html'
+htmlSources = [
+    outputDir + '*.html'
 ];
 
-var jsonSources = [
-    'builds/development/js/*.json'
+jsonSources = [
+    outputDir + 'js/*.json'
 ];
 
 /**
@@ -55,8 +73,16 @@ gulp.task('js', function () {
     gulp.src(jsSources)
         .pipe(concat('script.js'))
         .pipe(browserify())
-        .pipe(gulp.dest('builds/development/js'))
+        .pipe(gulpif(env === 'production', uglify()))
+        .pipe(gulp.dest(outputDir + 'js'))
         .pipe(connect.reload());
+});
+
+/**
+ * Gulp task for clear css cache before compass task
+ * */
+gulp.task('clean-css-cache', function () {
+    gulp.src('css/style.css').pipe(clean({force: true}));
 });
 
 /**
@@ -64,29 +90,17 @@ gulp.task('js', function () {
  * $ gulp compass
  * SASS Output Style Reference: http://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style
  * */
-gulp.task('compass', function () {
+gulp.task('compass', ['clean-css-cache'], function () {
     gulp.src(sassSources)
         .pipe(compass({
             sass: 'components/sass',
-            image: 'builds/development/images',
-            style: 'expanded'
+            image: outputDir + 'images',
+            style: (env === 'development' ? 'expanded' : 'compressed')
         })).on('error', gutil.log)
-        .pipe(gulp.dest('builds/development/css'))
+        .pipe(gulp.dest(outputDir + 'css'))
         .pipe(connect.reload());
 });
-
-/**
- * Gulp Task for monitor file changes
- * $ gulp watch
- * */
-gulp.task('watch', function () {
-    gulp.watch(coffeeSources, ['coffee']);
-    gulp.watch(jsSources, ['js']);
-    gulp.watch('components/sass/*', ['compass']);
-    gulp.watch(htmlSources, ['html']);
-    gulp.watch(jsonSources, ['json']);
-});
-
+        //.pipe(gulpif(env === 'production', minifyCSS()))
 /**
  * Web Browser live reload
  * $ gulp connect
@@ -94,7 +108,7 @@ gulp.task('watch', function () {
  * */
 gulp.task('connect', function() {
     connect.server({
-        root: 'builds/development/',
+        root: outputDir,
         livereload: true
     });
 });
@@ -116,7 +130,21 @@ gulp.task('json', function () {
 });
 
 /**
+ * Gulp Task for monitor file changes
+ * $ gulp watch
+ * */
+gulp.task('watch', function () {
+    gulp.watch(coffeeSources, ['coffee']);
+    gulp.watch(jsSources, ['js']);
+    gulp.watch('components/sass/*', ['compass']);
+    gulp.watch(htmlSources, ['html']);
+    gulp.watch(jsonSources, ['json']);
+});
+
+/**
  * Execute all Gulp Task
  * $ gulp default
  * */
-gulp.task('default', ['html', 'json', 'coffee', 'js', 'compass', 'connect', 'watch']);
+gulp.task('default', ['html', 'json', 'coffee', 'js', 'compass', 'connect', 'watch'], function () {
+    gutil.log('NODE_ENV=' + env);
+});

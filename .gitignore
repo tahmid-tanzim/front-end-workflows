@@ -9,3 +9,6 @@ builds/**/images/*
 
 # IDE Configuration
 .idea
+
+# Sass cache directory
+.sass-cache
