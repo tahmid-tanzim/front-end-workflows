@@ -68,6 +68,8 @@ npm install --save-dev gulp-if
 npm install --save-dev gulp-uglify
 npm install --save-dev gulp-minify-html
 npm install --save-dev gulp-jsonminify
+npm install --save-dev gulp-imagemin
+npm install --save-dev imagemin-pngquant
 ```
 ### 1.4. Installing [Browserify](http://browserify.org/) for requiring modules in browser
 ```
@@ -92,3 +94,4 @@ Link to [Semantic Versioning](http://semver.org/)
 Link to [Gulp API](https://github.com/gulpjs/gulp/blob/master/docs/API.md)
 ## 4. UglifyJS
 Link to [UglifyJS](https://github.com/mishoo/UglifyJS) 
+## 5. Using ES6 with Gulp

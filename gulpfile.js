@@ -9,6 +9,8 @@ var gulp = require('gulp'),
     clean = require('gulp-clean'),
     minifyHTML = require('gulp-minify-html'),
     minifyJSON = require('gulp-jsonminify'),
+    imagemin = require('gulp-imagemin'),
+    pngquant = require('imagemin-pngquant'),
     browserify = require('gulp-browserify');
 
 /**
@@ -127,6 +129,17 @@ gulp.task('json', function () {
         .pipe(connect.reload());
 });
 
+gulp.task('images', function() {
+    return gulp.src('builds/development/images/**/*.*')
+        .pipe(gulpif(env === 'production', imagemin({
+            progressive: true,
+            svgoPlugins: [{removeViewBox: false}],
+            use: [pngquant()]
+        })))
+        .pipe(gulpif(env === 'production', gulp.dest(outputDir + 'images')))
+        .pipe(connect.reload());
+});
+
 /**
  * Gulp Task for monitor file changes
  * $ gulp watch
@@ -137,12 +150,13 @@ gulp.task('watch', function () {
     gulp.watch('components/sass/*', ['compass']);
     gulp.watch('builds/development/*.html', ['html']);
     gulp.watch('builds/development/js/*.json', ['json']);
+    gulp.watch('builds/development/images/**/*.*', ['images']);
 });
 
 /**
  * Execute all Gulp Task
  * $ gulp default
  * */
-gulp.task('default', ['html', 'json', 'coffee', 'js', 'compass', 'connect', 'watch'], function () {
+gulp.task('default', ['html', 'json', 'coffee', 'js', 'compass', 'images', 'connect', 'watch'], function () {
     gutil.log('NODE_ENV=' + env);
 });
