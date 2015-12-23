@@ -67,6 +67,7 @@ npm install --save-dev gulp-connect
 npm install --save-dev gulp-if
 npm install --save-dev gulp-uglify
 npm install --save-dev gulp-minify-html
+npm install --save-dev gulp-jsonminify
 ```
 ### 1.4. Installing [Browserify](http://browserify.org/) for requiring modules in browser
 ```
