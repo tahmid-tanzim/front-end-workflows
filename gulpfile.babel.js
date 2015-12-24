@@ -77,7 +77,7 @@ gulp.task('js', () => {
  * Gulp task for clear css cache before compass task
  * */
 gulp.task('clean-css-cache', () => {
-    gulp.src('css/style.css').pipe(clean({force: true}));
+    gulp.src('components/css/style.css').pipe(clean({force: true}));
 });
 
 /**
@@ -89,6 +89,7 @@ gulp.task('compass', ['clean-css-cache'], () => {
     gulp.src(sassSources)
         .pipe(compass({
             sass: 'components/sass',
+            css: 'components/css',
             image: outputDir + 'images',
             style: (env === 'development' ? 'expanded' : 'compressed')
         })).on('error', gutil.log)
