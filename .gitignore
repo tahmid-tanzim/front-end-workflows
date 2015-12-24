@@ -5,10 +5,17 @@ node_modules
 .tmp
 .sass-cache
 .DS_Store
-builds/**/images/*
+
 
 # IDE Configuration
 .idea
 
 # Sass cache directory
 .sass-cache
+
+# Production Files
+builds/production/*.html
+builds/production/js/*.js
+builds/production/js/*.json
+builds/production/css/*.css
+builds/production/images/*

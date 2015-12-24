@@ -22,31 +22,25 @@ gulp.task('log', () => {
     gutil.log('Console Print: Hello World!');
 });
 
-let env,
-    coffeeSources,
-    jsSources,
-    sassSources,
-    outputDir;
-
 /**
  * Ref: https://nodejs.org/docs/latest/api/process.html#process_process_env
  * for Production ~> $ NODE_ENV=production gulp
  * */
-env = process.env.NODE_ENV || 'development';
-outputDir = (env === 'development' ? 'builds/development/' : 'builds/production/');
+const env = process.env.NODE_ENV || 'development';
+const outputDir = (env === 'development' ? 'builds/development/' : 'builds/production/');
 
-coffeeSources = [
+const coffeeSources = [
     'components/coffee/tagline.coffee'
 ];
 
-jsSources = [
+const jsSources = [
     'components/scripts/rclick.js',
     'components/scripts/pixgrid.js',
     'components/scripts/tagline.js',
     'components/scripts/template.js'
 ];
 
-sassSources = [
+const sassSources = [
     'components/sass/style.scss'
 ];
 
@@ -96,7 +90,7 @@ gulp.task('compass', ['clean-css-cache'], () => {
         .pipe(gulp.dest(outputDir + 'css'))
         .pipe(connect.reload());
 });
-//.pipe(gulpif(env === 'production', minifyCSS()))
+
 /**
  * Web Browser live reload
  * $ gulp connect
@@ -110,7 +104,7 @@ gulp.task('connect', () => {
 });
 
 /**
- * Execute html Gulp Task
+ * Execute html compress Gulp Task
  * $ gulp html
  * */
 gulp.task('html', () => {
@@ -121,7 +115,7 @@ gulp.task('html', () => {
 });
 
 /**
- * Execute json Gulp Task
+ * Execute json compress Gulp Task
  * $ gulp json
  * */
 gulp.task('json', () => {
