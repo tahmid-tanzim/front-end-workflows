@@ -30,6 +30,9 @@
     "gulp-util": "^3.0.7",
     "imagemin-pngquant": "^9.0.2",
     "jquery": "^3.6.0",
-    "mustache": "^2.2.1"
+    "mustache": "^2.2.1",
+    "lodash.template": ">=4.5.0",
+    "shell-quote": ">=1.6.1",
+    "uglify-js": ">=2.6.0"
   }
 }
